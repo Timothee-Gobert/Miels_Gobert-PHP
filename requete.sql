@@ -1,47 +1,77 @@
-create table got_article(
-    id integer auto_increment primary key,
-    designation varchar(250) not null,
-    preposition varchar(10) not null);
+create database MielsGobert;
 
-insert into got_article (designation,preposition) values
-    ("acacia","d'"),
-    ("forêt","de"),
-    ("printemps","de"),
-    ("tournesol","de"),
-    ("été","d'")
+create table article(
+    id integer auto_increment primary key,
+    referenceArticle varchar(10) not null,
+    typeArticle varchar(30) not null,
+    preposition varchar(10),
+    designation varchar(250) not null
+    );
+
+insert into article(referenceArticle,typeArticle,preposition,designation) values
+    ("pts","miel","de","printemps"),
+    ("aca","miel","d'","acacia"),
+    ("frt","miel","de","forêt"),
+    ("ete","miel","d'","été"),
+    ("tns","miel","de","tournesol")
 ;
 
-insert into got_article2 (refArticle,typeArticle,designation,poids,prixUnitaire,stockInit) values
-    ("id_got_article","250 g",5,65),
-    ("aca_500_2023","acacia","Miel d'acacia","500 g",10,206),
-    ("aca_1000_2023","acacia","Miel d'acacia","1 kg",15,130),
-    ("aca_5000_2023","acacia","Miel d'acacia","5 kg",NULL,0),
-    ("aca_10000_2023","acacia","Miel d'acacia","10 kg",NULL,0),
-    ("aca_40000_2023","acacia","Miel d'acacia","40 kg",NULL,0),
-    ("frt_250_2023","forêt","Miel de forêt","250 g",5,81),
-    ("frt_500_2023","forêt","Miel de forêt","500 g",10,105),
-    ("frt_1000_2023","forêt","Miel de forêt","1 kg",15,26),
-    ("frt_5000_2023","forêt","Miel de forêt","5 kg",NULL,0),
-    ("frt_10000_2023","forêt","Miel de forêt","10 kg",NULL,0),
-    ("frt_40000_2023","forêt","Miel de forêt","40 kg",NULL,0),
-    ("pts_250_2023","printemps","Miel de printemps","250 g",5,60),
-    ("pts_500_2023","printemps","Miel de printemps","500 g",10,97),
-    ("pts_1000_2023","printemps","Miel de printemps","1 kg",15,164),
-    ("pts_5000_2023","printemps","Miel de printemps","5 kg",NULL,0),
-    ("pts_10000_2023","printemps","Miel de printemps","10 kg",NULL,0),
-    ("pts_40000_2023","printemps","Miel de printemps","40 kg",NULL,0),
-    ("tns_250_2023","tournesol","Miel de tournesol","250 g",5,60),
-    ("tns_500_2023","tournesol","Miel de tournesol","500 g",10,97),
-    ("tns_1000_2023","tournesol","Miel de tournesol","1 kg",15,164),
-    ("tns_5000_2023","tournesol","Miel de tournesol","5 kg",NULL,0),
-    ("tns_10000_2023","tournesol","Miel de tournesol","10 kg",NULL,0),
-    ("tns_40000_2023","tournesol","Miel de tournesol","40 kg",NULL,0),
-    ("ete_250_2023","été","Miel d'été","250 g",5,65),
-    ("ete_500_2023","été","Miel d'été","500 g",10,206),
-    ("ete_1000_2023","été","Miel d'été","1 kg",15,130),
-    ("ete_5000_2023","été","Miel d'été","5 kg",NULL,0),
-    ("ete_10000_2023","été","Miel d'été","10 kg",NULL,0),
-    ("ete_40000_2023","été","Miel d'été","40 kg",NULL,0),
+create table poids(
+    id integer auto_increment primary key,
+    poids int
+    );
+
+insert into poids(poids) values
+    (0),
+    (250),
+    (500),
+    (1000),
+    (5000),
+    (10000),
+    (40000)
+;
+
+create table prixstock(
+    id integer auto_increment primary key,
+    article_id int not null,
+    poids_id int not null,
+    prix NUMERIC(10,2),
+    stock int not null,
+    foreign key(article_id) references article(id),
+    foreign key(poids_id) references poids(id)
+    );
+
+insert into prixstock(article_id,poids_id,prix,stock) values
+    (0,1,5,60),
+    (0,2,10,97),
+    (0,3,15,164),
+    (0,4,NULL,0),
+    (0,5,NULL,0),
+    (0,6,NULL,0),
+    (1,1,5,206),
+    (1,2,10,130),
+    (1,3,15,0),
+    (1,4,NULL,0),
+    (1,5,NULL,0),
+    (1,6,NULL,0),
+    (2,1,5,81),
+    (2,2,10,105),
+    (2,3,15,26),
+    (2,4,NULL,0),
+    (2,5,NULL,0),
+    (2,6,NULL,0),
+    (3,1,5,65),
+    (3,2,10,206),
+    (3,3,15,130),
+    (3,4,NULL,0),
+    (3,5,NULL,0),
+    (3,6,NULL,0),
+    (4,1,5,60),
+    (4,2,10,97),
+    (4,3,15,164),
+    (4,4,NULL,0),
+    (4,5,NULL,0),
+    (4,6,NULL,0)
 ;
 
 create table got_civilite(

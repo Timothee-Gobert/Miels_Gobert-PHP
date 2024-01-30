@@ -7,7 +7,7 @@ function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
       try{
             $connexion = new PDO($dns,$user,$password);
       }catch(Exception $e){
-            echo "<h1> Connexion imposible ! Vérifiez les paramètres! </h1>"
+            echo "<h1> Connexion imposible ! Vérifiez les paramètres! </h1>";
             die;
       }
       return $connexion;
