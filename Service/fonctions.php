@@ -1,6 +1,6 @@
 <?php
 
-require_once("config.php");
+require_once("./Config/parametres_serveur.php");
 
 function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
       $dns="mysql:host=$host;dbname=$dbname;charset=utf8";
