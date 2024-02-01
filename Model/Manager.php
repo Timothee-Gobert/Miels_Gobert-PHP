@@ -8,9 +8,9 @@ class Manager{
         $connexion=$this->connexion();
         $condition='';
         $values=[];
-        foreach($dataCondition as $key=>$value){// a chaque element du tableau $dataCondition on le recupere dans la variable $values ET $key correspond à l'indice de l'element
-            $condition.=(!$condition)?" $key=? " : " and $key=? "; // (condition) ? si vrai : si faux ;
-            $values[]=$value; // on pousse dans la variable tableau le contenu de la variable $value
+        foreach($dataCondition as $key=>$value){
+            $condition.=(!$condition)?" $key=? " : " and $key=? ";
+            $values[]=$value;
         }
         $condition=(!$condition)?"true" : $condition;
         $sql="select * from $table where $condition $order";
@@ -37,19 +37,9 @@ class Manager{
             $connexion=$this->connexion();
             $condition='';
             $values=[];
-            foreach($dataCondition as $key=>$value){// a chaque element du tableau $dataCondition on le recupere dans la variable $values ET $key correspond à l'indice de l'element
-                
-                //// syntaxe basique
-                // if(!$condition){ // si $condition est vide == if($condition=='')
-                //     $condition.=" $key=? ";
-                // }else{
-                //     $condition.=" and $key=? ";
-                // }
-
-                /// syntaxe ternaire
-                $condition.=(!$condition)?" $key=? " : " and $key=? "; // (condition) ? si vrai : si faux ;
-
-                $values[]=$value; // on pousse dans la variable tableau le contenu de la variable $value
+            foreach($dataCondition as $key=>$value){
+                $condition.=(!$condition)?" $key=? " : " and $key=? ";
+                $values[]=$value;
             }
             $condition=(!$condition)?"true" : $condition;
             $sql="select * from $table where $condition";
@@ -124,11 +114,7 @@ class Manager{
             }
         }
         $sql="insert into $table ($column) values ($pi)";
-        // --- test
-        // echo $sql;
-        // MyFct::sprintr($values);
-        // die;
-        // ---
+        
         $requete=$connexion->prepare($sql);
         $requete->execute($values);
     }
@@ -150,12 +136,6 @@ class Manager{
         $requete=$connexion->prepare($sql);
         $requete->execute();
         $colonnes=$requete->fetchAll(PDO::FETCH_COLUMN);// recuperation de tous les noms de colonne de la table collaborateur
-        /* sans avoir une bonne methode on devait initialiser la variavle tableau en :
-        $variables=[
-            'id'=>'',
-            'civilite'=>'',
-            'nom'=>'',
-        ];*/
         $variables=[];
         foreach($colonnes as $valeur){
             $variables[$valeur]='';
@@ -164,8 +144,8 @@ class Manager{
     }
     
     function findByIdTable($nomTable,$id){
-        $connexion=$this->connexion(); // valeur retourner par la fonction $this->connexion() du fichier myFct
-        $sql="select * from $nomTable where id=?"; // ecrire la requete sql correspondante
+        $connexion=$this->connexion();
+        $sql="select * from $nomTable where id=?";
         $requete=$connexion->prepare($sql); // dire à PHP de préparer la requete sql
         $requete->execute([$id]); // executer la requete avec id = $id
         ///$resultat=$requete->fetch(); // Mettre dans $ article l'article trouvé

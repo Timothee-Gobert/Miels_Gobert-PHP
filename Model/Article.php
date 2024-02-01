@@ -10,7 +10,7 @@ class Article extends ArticleManager{
       public function __construct($data=[]){
             if($data){ // if($data!=[])
                   foreach($data as $key=>$valeur){
-                        $set="set".ucfirst($key); // creation de fonction set (cas où $key='numArticle' alors $set="setNumArticle")
+                        $set="set".ucfirst($key);
                         if(method_exists($this,$set)){
                               $this->$set($valeur);
                         }

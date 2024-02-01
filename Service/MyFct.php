@@ -4,6 +4,9 @@ require_once("./Config/parametres_serveur.php");
 
 class MyFct{
 
+    function isAdmin(){
+        
+    }
     function notGranted($role_libelle){
         $granted=self::isGranted($role_libelle); // comme isGranted() est static utilise self:: au lieu de $this
         if($granted){
@@ -37,10 +40,9 @@ class MyFct{
     }
     
 
-    function generatePage($file,$variables=[],$base="View/base-bs.html.php"){
-        //$variables  : une variable en tableau qui contnient comme indices les noms des variables utilisées par $file  
+    function generatePage($file,$variables=[],$base="View/base-bs.html.php"){  
         if(file_exists($file)){
-            extract($variables);    // Exemple ['x'=>2,'y'=>5,'z'=>10]   . avec extract($variables) , on a $x=2;  $y=5 et $z=10
+            extract($variables);
             ob_start();             // Ouvrir   la memoire tampon pour contenir lfichier $file à transformer en texte
             require_once($file);
             $content=ob_get_clean();

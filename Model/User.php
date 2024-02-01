@@ -10,7 +10,7 @@
             private $adresse;
             private $ville;
             private $codePostal;
-            private $mail;
+            private $email;
             private $telephone;
             private $password;
 
@@ -25,13 +25,7 @@
                   }
             }    
 
-            /**
-             * Get the value of id
-             */ 
-            public function getId()
-            {
-                        return $this->id;
-            }
+            public function getId(){return $this->id;}
 
             /**
              * Set the value of id
@@ -206,21 +200,21 @@
             }
 
             /**
-             * Get the value of mail
+             * Get the value of email
              */ 
-            public function getMail()
+            public function getEmail()
             {
-                        return $this->mail;
+                        return $this->email;
             }
 
             /**
-             * Set the value of mail
+             * Set the value of email
              *
              * @return  self
              */ 
-            public function setMail($mail)
+            public function setEmail($email)
             {
-                        $this->mail = $mail;
+                        $this->email = $email;
 
                         return $this;
             }
@@ -263,5 +257,13 @@
                         $this->password = $password;
 
                         return $this;
+            }
+
+            public function getCiv(){
+                  $civilite_id=$this->getCivilite_id();
+                  $cm=new CiviliteManager;
+                  $civilite=$cm->findById($civilite_id);
+                  $libelle=$civilite->getLibelle();
+                  return $libelle;
             }
       }

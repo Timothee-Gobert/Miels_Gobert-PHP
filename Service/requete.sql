@@ -93,11 +93,11 @@ create table user(
     adresse varchar(250)not null,
     ville varchar(250)not null,
     codePostal CHAR(10)not null,
-    mail varchar(250)not null,
+    email varchar(250)not null,
     telephone CHAR(10),
     password varchar(200) not null,
     foreign key (civilite_id) references civilite(id)
 );
 
-insert into user(username,administrateur,civilite_id,nom,prenom,adresse,codePostal,ville,mail,telephone,password) values
+insert into user(username,administrateur,civilite_id,nom,prenom,adresse,codePostal,ville,email,telephone,password) values
     ("tgobert",1,1,"Gobert","Timothée","7 rue du petit huis",89510,"Véron","timothee.gobert92@gmail.com",0662698480,sha1('isnt'));

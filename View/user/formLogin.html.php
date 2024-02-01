@@ -2,7 +2,7 @@
       <h1 class="titre text-light">Login</h1>
       <form action="" method="post">
             <div class="form-line-input my-2">
-                  <label for="" class="lab30">Identifiant</label>
+                  <label for="" class="lab30">username ou email</label>
                   <input type="text" id="username" name="username" value="" class="form-control w50" autocomplete="off">
             </div>
             <div class="form-line-input my-2">
@@ -10,7 +10,7 @@
                   <input type="password" id="password" name="password" value="" class="form-control w50">
             </div>
             <div class="div-btn">
-                  <a href="accueil">Quitter</a>
+                  <a href="home">Quitter</a>
                   <input type="submit" class="btn btn-md btn-primary" value="Valider">
             </div>
       </form>

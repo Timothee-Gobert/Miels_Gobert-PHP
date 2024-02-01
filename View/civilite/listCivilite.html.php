@@ -1,0 +1,100 @@
+<div class="m-auto w80">
+      <h1 class="titre text-light">LISTE DES CIVILITES</h1>
+      <div class="div-btn my-2">
+            <a href="javascript:creerCivilite()" class="btn btn-md btn-primary"><i class="fa fa-solid fa-plus"></i>Nouvelle
+                  civilite</a>
+            <a href="javascript:afficherCivilite()" class="btn btn-md btn-primary"><i
+                        class="fa fa-solid fa-eye"></i>Afficher</a>
+            <a href="javascript:modifierCivilite()" class="btn btn-md btn-primary"><i
+                        class="fa fa-solid fa-pen"></i>Modifier</a>
+            <a href="javascript:supprimerCivilite()" class="btn btn-md btn-primary"><i
+                        class="fa fa-solid fa-trash"></i>Supprimer</a>
+      </div>
+      <table class="w100 table-responsive">
+            <thead id="thead_civilite">
+                  <tr class="bg_green">
+                        <td class="w10 center">Choix</td>
+                        <td class="w20 center">Id</td>
+                        <td class="w20 center">libelle</td>
+                  </tr>
+            </thead>
+            <tbody id="tbody_civilite">
+                  <?php foreach($lignes as $ligne): ?>
+                  <tr>
+                        <td class="center"> <input type="checkbox" name="civilite" id="<?=$ligne['id']?>"
+                                    value="<?=$ligne['id']?>" onclick="onlyOne(this)"></td>
+                        <td><?=$ligne['id']?></td>
+                        <td><?=$ligne['libelle']?></td>
+                  </tr>
+                  <?php endforeach;?>
+            </tbody>
+            <tfoot id="tfoot_civilite">
+                  <tr class="bg_green">
+                        <th colspan="5" class="text-center">Nombre civilites : <?=$nbre?></th>
+                  </tr>
+            </tfoot>
+      </table>
+</div>
+
+<script>
+function creerCivilite() {
+      document.location.href = "civilite&action=insert";
+}
+
+function afficherCivilite() {
+      let id = getIdChecked('civilite');
+      if (id == 0) {
+            alert("selectionnez bien une ligne");
+      } else {
+            document.location.href = "civilite&action=show&id=" + id;
+      }
+}
+
+function supprimerCivilite() {
+      let id = getIdChecked('civilite');
+      if (id == 0) {
+            alert("selectionnez bien une ligne");
+      } else {
+            const response = confirm("Voulez vous vraiment supprimer ce civilite ?");
+            if (response) {
+                  document.location.href = "civilite&action=delete&id=" + id;
+            }
+      }
+}
+
+function modifierCivilite() {
+      let id = getIdChecked('civilite');
+      if (id == 0) {
+            alert("selectionnez bien une ligne");
+      } else {
+            document.location.href = "Civilite&action=update&id=" + id;
+      }
+}
+
+function chercher() {
+      document.location.href = "civilite&action=search&mot=" + mot.value;
+}
+
+function touche(event) {
+      if (event.keyCode == 13) {
+            chercher();
+      }
+}
+
+function chercher() {
+      document.location.href = "civilite&action=search&mot=" + mot.value;
+}
+
+function touche(event) {
+      if (event.keyCode == 13) {
+            chercher();
+      }
+}
+
+function supprimer(id) {
+      const response = confirm("Voulez-vous bien supprimer ce civilite?");
+      if (response) {
+            document.location.href = "civilite&action=delete&id=" + id;
+      }
+}
+</script>

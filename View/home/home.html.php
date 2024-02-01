@@ -1,5 +1,5 @@
 <div id='home' class="w100 ">
     <div class="banner">
-        <h1>test</h1>
+        <h1>Page home.html.php</h1>
     </div>
 </div>

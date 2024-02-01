@@ -21,9 +21,15 @@
 <body>
       <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-light">
+            <?php if($_SESSION['admin']==0): ?>
                   <a class="navbar-brand" href="home"><img src="Public/Image/globale/logo.jpg"
                               alt="Logo de l'entreprise"></a>
-
+            <?php endif; ?>
+            <?php if($_SESSION['admin']==1): ?>
+                  <a class="navbar-brand" href="admin"><img src="Public/Image/globale/logo.jpg"
+                              alt="Logo de l'entreprise"></a>
+            <?php endif; ?>
+            
                   <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                               <li class="nav-item">
@@ -56,7 +62,7 @@
                                           <li>
                                                 <hr class="dropdown-divider">
                                           </li>
-                                          <li><a class="dropdown-item" href="#">Pastilles propolis miel</a></li>
+                                          <li><a class="dropdown-item" href="user">Pastilles propolis miel</a></li>
                                           <li><a class="dropdown-item" href="#">Pains d'épices</a></li>
                                           <li><a class="dropdown-item" href="#">Gelée royale</a></li>
                                           <li><a class="dropdown-item" href="#">Capsule de cire</a></li>
@@ -79,19 +85,24 @@
 
                         <?php else :?>
 
-                              <a href="" class=" dropdown-toggle text-dark" data-bs-toggle="dropdown"><i
-                                                class="fa fa-user fa-2x"></i>Visiteur</a>
-                                    <ul class="dropdown-menu w100 bg_blue">
-                                          <li class="nav-item w100 p-2"><a href="user&action=login" class="nav-link">Se connecter</a></li>
-                                          <li class="nav-item w100 p-2"><a href="" class="nav-link">S'inscrire</a></li>
-                                    </ul>
-                                    <?php endif; ?>     
+                        <a href="" class=" dropdown-toggle text-dark" data-bs-toggle="dropdown"><i
+                                    class="fa fa-user fa-2x"></i>Visiteur</a>
+                        <ul class="dropdown-menu w100 bg_blue">
+                              <li class="nav-item w100 p-2"><a href="user&action=login" class="nav-link">Se
+                                          connecter</a></li>
+                              <li class="nav-item w100 p-2"><a href="" class="nav-link">S'inscrire</a></li>
+                        </ul>
+                        <?php endif; ?>
                   </div>
             </nav>
             <!-- <div>
                   <img id="bandeau" src="Public/Image/globale/bg-photo.jpg" alt="bandeau">
             </div> -->
-
+            <main>
+                  <div id="section-bs" class="col-md-9">
+                        <?=$content?>
+                  </div>
+            </main>
             <footer class="my-2">
 
             </footer>
