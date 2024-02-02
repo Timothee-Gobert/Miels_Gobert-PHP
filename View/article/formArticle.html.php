@@ -1,58 +1,61 @@
-<div class="m-auto w80 my-4">
-      <h1 class="titre text-light">SAISIE ARTICLE</h1>
-      <form action="article&action=save" method='post' enctype="multipart/form-data">
+<div class="container-fluid">
+      <div class="mx-auto d-block w-50">
+            <h1 class="titre text-dark text-center my-4">SAISIE ARTICLE</h1>
 
-            <div class="mb-3 my-2 hidden">
-                  <div class=" hidden">
-                        <label for="id" class="lab30 form-label">ID</label>
-                        <input class="form-control w20" type="text" id='id' name="id" value="<?=$id?>">
-                  </div>
-            </div>
+            <form class="row" action="article&action=save" method='post' enctype="multipart/form-data">
 
-            <div class="my-2 mb-3 col">
-                  <div>
-                        <label for="referenceArticle" class="lab30 obligatoire form-label">Reference</label>
-                  </div class='col'>
-                  <div>
-                        <input required class="form-control w20" type="text" id='referenceArticle' name="referenceArticle"
-                              value="<?=$referenceArticle?>" <?=$disabled?>>
+                  <div class="hidden">
+                        <div>
+                              <label for="id" class="lab30 form-label">ID</label>
+                              <input class="form-control w20" type="text" id='id' name="id" value="<?=$id?>">
+                        </div>
                   </div>
-            </div>
 
-            <div class="my-2 mb-3 col">
-                  <div>
-                        <label for="typeArticle" class="lab30">Type</label>
+                  <div class="col-auto">
+                        <div>
+                              <label for="referenceArticle" class="lab30 obligatoire form-label">Reference</label>
+                        </div class='col'>
+                        <div>
+                              <input required placeholder="aca" class="form-control w20" type="text" id='referenceArticle'
+                                    name="referenceArticle" value="<?=$referenceArticle?>" <?=$disabled?>>
+                        </div>
                   </div>
-                  <div>
-                        <input class="form-control w70" type="text" id='typeArticle' name="typeArticle" value="<?=$typeArticle?>"
-                              <?=$disabled?>>
-                  </div>
-            </div>
 
-            <div class="my-2 mb-3 col">
-                  <div>
-                        <label for="preposition" class="lab30">Préposition</label>
+                  <div class="col-auto">
+                        <div>
+                              <label for="typeArticle" class="lab30 obligatoire form-label">Type</label>
+                        </div>
+                        <div>
+                              <input required placeholder="miel" class="form-control w70" type="text" id='typeArticle' name="typeArticle"
+                                    value="<?=$typeArticle?>" <?=$disabled?>>
+                        </div>
                   </div>
-                  <div>
-                        <input class="form-control w70" type="text" id='preposition' name="preposition" value="<?=$preposition?>"
-                              <?=$disabled?>>
-                  </div>
-            </div>
 
-            <div class="my-2 mb-3 col">
-                  <div>
-                        <label for="designation" class="lab30">Désignation</label>
+                  <div class="col-auto">
+                        <div>
+                              <label for="preposition" class="lab30 obligatoire form-label">Préposition</label>
+                        </div>
+                        <div>
+                              <input required placeholder="d'" class="form-control w70" type="text" id='preposition' name="preposition"
+                                    value="<?=$preposition?>" <?=$disabled?>>
+                        </div>
                   </div>
-                  <div>
-                        <input class="form-control w70" type="text" id='designation' name="designation" value="<?=$designation?>"
-                              <?=$disabled?>>
-                  </div>
-            </div>
 
-            <div class="div-btn">
-                  <a href="article" class="btn btn-md btn-success">Retour à la liste</a>
-                  <input type="reset" class="btn btn-md btn-danger" value="Annuler" <?=$disabled?>>
-                  <input type="submit" class="btn btn-md btn-primary" value="Valider" <?=$disabled?>>
-            </div>
-      </form>
+                  <div class="col-auto">
+                        <div>
+                              <label for="designation" class="lab30 obligatoire form-label">Désignation</label>
+                        </div>
+                        <div>
+                              <input required placeholder="acacia" class="form-control w70" type="text" id='designation' name="designation"
+                                    value="<?=$designation?>" <?=$disabled?>>
+                        </div>
+                  </div>
+
+                  <div class="text-center my-5 d-flex justify-content-evenly">
+                        <a href="article" class="btn btn-md btn-success">Retour à la liste</a>
+                        <input type="reset" class="btn btn-md btn-danger" value="Annuler" <?=$disabled?>>
+                        <input type="submit" class="btn btn-md btn-primary" value="Valider" <?=$disabled?>>
+                  </div>
+            </form>
+      </div>
 </div>

@@ -40,7 +40,29 @@ class MyFct{
     }
     
 
-    function generatePage($file,$variables=[],$base="View/base-bs.html.php"){  
+    function generatePage($file,$variables=[],$base="View/base-bs.html.php"){ 
+        if($base=="View/base-bs-admin.html.php"){
+            if($_SESSION['admin']==1){
+                if(file_exists($file)){
+                    extract($variables);
+                    ob_start();             // Ouvrir   la memoire tampon pour contenir lfichier $file à transformer en texte
+                    require_once($file);
+                    $content=ob_get_clean();
+                    ob_start();             // Ouvrir à nouveau la memoire tampon pour recevoir le fichier $base avec la variable $content
+                    require_once($base);
+                    $page=ob_get_clean();
+                    echo $page;
+                }else{
+                    header('location:home');; 
+                    die;
+                }
+            }else{
+                header('location:home');
+                die;
+            }
+        }
+    
+        
         if(file_exists($file)){
             extract($variables);
             ob_start();             // Ouvrir   la memoire tampon pour contenir lfichier $file à transformer en texte
@@ -51,7 +73,7 @@ class MyFct{
             $page=ob_get_clean();
             echo $page;
         }else{
-            echo "<h1>Desolé! Le fichier $file n'existe pas!</h1>"; 
+            header('location:home');; 
             die;
         }
     }

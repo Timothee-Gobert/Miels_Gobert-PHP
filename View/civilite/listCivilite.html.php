@@ -1,39 +1,42 @@
-<div class="m-auto w80">
-      <h1 class="titre text-light">LISTE DES CIVILITES</h1>
-      <div class="div-btn my-2">
-            <a href="javascript:creerCivilite()" class="btn btn-md btn-primary"><i class="fa fa-solid fa-plus"></i>Nouvelle
-                  civilite</a>
-            <a href="javascript:afficherCivilite()" class="btn btn-md btn-primary"><i
-                        class="fa fa-solid fa-eye"></i>Afficher</a>
-            <a href="javascript:modifierCivilite()" class="btn btn-md btn-primary"><i
-                        class="fa fa-solid fa-pen"></i>Modifier</a>
-            <a href="javascript:supprimerCivilite()" class="btn btn-md btn-primary"><i
-                        class="fa fa-solid fa-trash"></i>Supprimer</a>
+<div class="container-fluid">
+      <div class="mx-auto d-block w-50">
+            <h1 class="titre text-dark text-center my-4">LISTE DES CIVILITES</h1>
+            <div class="text-center my-5 d-flex justify-content-evenly">
+                  <a href="javascript:creerCivilite()" class="btn btn-md btn-outline-success"><i
+                              class="fa fa-solid fa-plus"></i>Nouvelle
+                        civilite</a>
+                  <a href="javascript:afficherCivilite()" class="btn btn-md btn-outline-primary"><i
+                              class="fa fa-solid fa-eye"></i>Afficher</a>
+                  <a href="javascript:modifierCivilite()" class="btn btn-md btn-outline-warning"><i
+                              class="fa fa-solid fa-pen"></i>Modifier</a>
+                  <a href="javascript:supprimerCivilite()" class="btn btn-md btn-outline-danger"><i
+                              class="fa fa-solid fa-trash"></i>Supprimer</a>
+            </div>
+            <table class="table table-striped">
+                  <thead id="thead_civilite">
+                        <tr class="bg_green">
+                              <th class="text-center">Choix</th>
+                              <th class="text-center">Id</th>
+                              <th class="text-center">libelle</th>
+                        </tr>
+                  </thead>
+                  <tbody id="tbody_civilite">
+                        <?php foreach($lignes as $ligne): ?>
+                        <tr>
+                              <td class="text-center"> <input type="checkbox" name="civilite" id="<?=$ligne['id']?>"
+                                          value="<?=$ligne['id']?>" onclick="onlyOne(this)"></td>
+                              <td class="text-center"><?=$ligne['id']?></td>
+                              <td class="text-center"><?=$ligne['libelle']?></td>
+                        </tr>
+                        <?php endforeach;?>
+                  </tbody>
+                  <tfoot id="tfoot_civilite">
+                        <tr class="bg_green">
+                              <th colspan="3" class="text-center">Nombre civilites : <?=$nbre?></th>
+                        </tr>
+                  </tfoot>
+            </table>
       </div>
-      <table class="w100 table-responsive">
-            <thead id="thead_civilite">
-                  <tr class="bg_green">
-                        <td class="w10 center">Choix</td>
-                        <td class="w20 center">Id</td>
-                        <td class="w20 center">libelle</td>
-                  </tr>
-            </thead>
-            <tbody id="tbody_civilite">
-                  <?php foreach($lignes as $ligne): ?>
-                  <tr>
-                        <td class="center"> <input type="checkbox" name="civilite" id="<?=$ligne['id']?>"
-                                    value="<?=$ligne['id']?>" onclick="onlyOne(this)"></td>
-                        <td><?=$ligne['id']?></td>
-                        <td><?=$ligne['libelle']?></td>
-                  </tr>
-                  <?php endforeach;?>
-            </tbody>
-            <tfoot id="tfoot_civilite">
-                  <tr class="bg_green">
-                        <th colspan="5" class="text-center">Nombre civilites : <?=$nbre?></th>
-                  </tr>
-            </tfoot>
-      </table>
 </div>
 
 <script>

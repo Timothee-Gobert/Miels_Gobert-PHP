@@ -21,7 +21,7 @@
 <body>
       <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-light">
-                  <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                               <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="home">Home</a>
@@ -43,7 +43,7 @@
                         <a href="" class=" dropdown-toggle text-dark" data-bs-toggle="dropdown"><i
                                     class="fa fa-user fa-2x"></i><?=$_SESSION['username']?></a>
                         <ul class="dropdown-menu w100 bg_blue">
-                              <li class="nav-item w100 p-2"><a href="" class="nav-link">Compte</a></li>
+                              <li class="nav-item w100 p-5"><a href="" class="nav-link">Compte</a></li>
                               <li class="nav-item w100 p-2"><a href="user&action=logout"
                                           class="nav-link">Deconnexion</a></li>
                         </ul>
@@ -53,7 +53,7 @@
                   <img id="bandeau" src="Public/Image/globale/bg-photo.jpg" alt="bandeau">
             </div> -->
             <main>
-                  <div id="section-bs" class="col-md-9">
+                  <div>
                         <?=$content?>
                   </div>
             </main>

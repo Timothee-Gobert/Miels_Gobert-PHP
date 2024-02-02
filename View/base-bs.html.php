@@ -99,7 +99,7 @@
                   <img id="bandeau" src="Public/Image/globale/bg-photo.jpg" alt="bandeau">
             </div> -->
             <main>
-                  <div id="section-bs" class="col-md-9">
+                  <div>
                         <?=$content?>
                   </div>
             </main>
