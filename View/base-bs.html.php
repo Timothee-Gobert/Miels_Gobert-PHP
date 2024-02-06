@@ -7,9 +7,9 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <link rel="stylesheet" href="./Public/bootstrap-5.3.2-dist/css/bootstrap.css">
-      <link rel="stylesheet" href="./Public/fontawesome-free-6.5.0-web/css/all.css">
-      <link rel="stylesheet" href="./Public/css/style.css">
+      <link rel="stylesheet" href="Public/bootstrap-5.3.2-dist/css/bootstrap.css">
+      <link rel="stylesheet" href="Public/fontawesome-free-6.5.0-web/css/all.css">
+      <link rel="stylesheet" href="Public/CSS/style.css">
 
       <script src="./Public/bootstrap-5.3.2-dist/js/bootstrap.bundle.js" defer></script>
       <script src="./Public/js/myScript.js" defer></script>
@@ -22,11 +22,11 @@
       <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-light">
             <?php if($_SESSION['admin']==0): ?>
-                  <a class="navbar-brand" href="home"><img src="Public/Image/globale/logo.jpg"
+                  <a class="navbar-brand" href="home"><img id="logo-nav-bar_base-bs" src="Public/Image/globale/logo.jpg"
                               alt="Logo de l'entreprise"></a>
             <?php endif; ?>
             <?php if($_SESSION['admin']==1): ?>
-                  <a class="navbar-brand" href="admin"><img src="Public/Image/globale/logo.jpg"
+                  <a class="navbar-brand" href="admin"><img id="logo-nav-bar_base-bs" src="Public/Image/globale/logo.jpg"
                               alt="Logo de l'entreprise"></a>
             <?php endif; ?>
             
@@ -99,7 +99,7 @@
                   <img id="bandeau" src="Public/Image/globale/bg-photo.jpg" alt="bandeau">
             </div> -->
             <main>
-                  <div>
+                  <div id="section-bs" class="col-md-9">
                         <?=$content?>
                   </div>
             </main>

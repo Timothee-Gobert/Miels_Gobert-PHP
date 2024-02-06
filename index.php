@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+error_reporting(E_ALL); ini_set("display_errors", 1);
 if(!$_SESSION){ //On test si la variable global $_SESSION est encore vide ===> $_SESSION=[];
       $_SESSION['username']='user';
       $_SESSION['admin']=0;
@@ -12,7 +13,8 @@ spl_autoload_register('charger'); // charge automatiqument la fonction indiqué 
 // $MyFct=new MyFct;
 // echo $MyFct->crypter('isnt');die;
 $path='home';
-extract($_GET); // generation de variable via les indices de la variable global $_GET (ex : $path, $action, ...)
+extract($_GET); 
+//printr([$_GET]);die;// generation de variable via les indices de la variable global $_GET (ex : $path, $action, ...)
 $nameController=ucfirst($path)."Controller";
 $fileController="Controller/$nameController.php";
 if(file_exists($fileController)){

@@ -2,7 +2,6 @@
 class UserController extends MyFct{
       function __construct(){
             $action ='list';
-            // echo $action ;die;
             extract($_GET);
             switch ($action){
                   case 'list': 
@@ -27,7 +26,7 @@ class UserController extends MyFct{
                         $this->chercherUser($mot);
                         break;
                   case 'login' :
-                        if($_POST){ // if($_POST!=[]) ou if(!empty($_POST)) //// $_POST valeur entrées dans les forms
+                        if($_POST){ // if($_POST!=[]) ou if(!empty($_POST))
                             $this->valider($_POST);
                         }
                         $this->seConnecter();
@@ -66,14 +65,12 @@ class UserController extends MyFct{
             ];
             //------------Evoi page-------------*/
             $file="View/user/listUser.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
       }
       
       function insererUser(){
-            //-----User---
             $user=new User();  // Créer un user à vide
             $disabled="";
-            /*------Creation de la page FormUser-----*/
             $this->generateFormUser($user,$disabled);
       }      
         
@@ -88,7 +85,6 @@ class UserController extends MyFct{
             $um=new UserManager();
             $user=$um->findById($id);
             $disabled="disabled";
-            //----Role----------------
             $this->generateFormUser($user,$disabled);
       }
 
@@ -103,20 +99,19 @@ class UserController extends MyFct{
             $um=new UserManager();
             $connexion=$um->connexion();
             $password=$data['password'];
-            if($password){ // tester si $password n'est ni vide ni null ni egal à 0
+            if($password){ 
                 $password=$this->crypter($password);
                 $data['password']=$password;
             }else{
                 unset($data['password']);
             }
             extract($data);
-            $id=(int) $id;  // transformation de $id en entier
-            if($id!=0){  // cas d'une modification
+            $id=(int) $id;
+            if($id!=0){ 
                 $um->update($data,$id);
-            }else{  //  cas d'une insertion 
+            }else{
                 $um->insert($data);
             }
-            //  Redurection vers la page list user
             header("location:user");
       }
 
@@ -129,7 +124,7 @@ class UserController extends MyFct{
                 'nbre'=>count($users),
             ];
             $file="View/user/listUser.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");        
+            $this->generatePage($file,$variables);        
       }      
 
       function valider($data){
@@ -163,7 +158,7 @@ class UserController extends MyFct{
                 ];
 
                 $file="View/erreur/erreur.html.php";
-                $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+                $this->generatePage($file,$variables);
             }
       }
         
@@ -197,7 +192,7 @@ class UserController extends MyFct{
             ];
             //----Ouverture de la page
             $file="View/user/formUser.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
 
       }  
 }

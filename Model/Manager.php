@@ -1,6 +1,6 @@
 <?php
 
-require_once("./Config/parametres_serveur.php");
+require_once("./Config/database_settings.php");
 
 class Manager{
 
@@ -116,18 +116,18 @@ class Manager{
         $sql="insert into $table ($column) values ($pi)";
         
         $requete=$connexion->prepare($sql);
+        // printr($value);die("Die Manager.php ligne 119");
         $requete->execute($values);
     }
 
-    function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
-        $dns="mysql:host=$host;dbname=$dbname;charset=utf8";
+    function connexion($dbhost=HOST,$dbname=DBNAME,$dbuser=USER,$dbpass=PASSWORD){
         try{
-            $connexion=new PDO($dns,$user,$password);
-        }catch(Exception $e){
-            echo "<h1> Connexion impossible ! Verifiez les paramètres !</h1>";
+            $connexion = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8",$dbuser,$dbpass);
+      }catch(Exception $e){
+            echo "<h1> $dbhost $dbname $dbuser $dbpass Connexion  ! Vérifiez les paramètres!</h1>";
             die;
-    }
-            return $connexion;
+      }
+      return $connexion;
         }
     
     function getDescribeTable($table){
@@ -146,8 +146,8 @@ class Manager{
     function findByIdTable($nomTable,$id){
         $connexion=$this->connexion();
         $sql="select * from $nomTable where id=?";
-        $requete=$connexion->prepare($sql); // dire à PHP de préparer la requete sql
-        $requete->execute([$id]); // executer la requete avec id = $id
+        $requete=$connexion->prepare($sql);
+        $requete->execute([$id]);
         ///$resultat=$requete->fetch(); // Mettre dans $ article l'article trouvé
         $resultat=$requete->fetch(PDO::FETCH_ASSOC);
         return $resultat;

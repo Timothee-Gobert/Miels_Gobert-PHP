@@ -1,4 +1,4 @@
-create database MielsGobert;
+create database mielsgobert;
 
 create table article(
     id integer auto_increment primary key,
@@ -76,10 +76,10 @@ insert into prixstock(article_id,poids_id,prix,stock) values
 
 create table civilite(
     id integer auto_increment primary key,
-    libele varchar(2) not null unique
+    libelle varchar(2) not null unique
 );
 
-insert into civilite(libele) values
+insert into civilite(libelle) values
     ("M"),
     ("MM");
 
@@ -100,4 +100,4 @@ create table user(
 );
 
 insert into user(username,administrateur,civilite_id,nom,prenom,adresse,codePostal,ville,email,telephone,password) values
-    ("tgobert",1,1,"Gobert","Timothée","7 rue du petit huis",89510,"Véron","timothee.gobert92@gmail.com",0662698480,sha1('isnt'));
+    ("tgobert",1,1,"Gobert","Timothée","7 rue du petit huis",89510,"Véron","timothee.gobert92@gmail.com",0662698480,sha1(''));

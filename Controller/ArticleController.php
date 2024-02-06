@@ -29,8 +29,8 @@ class ArticleController extends MyFct{
       }
 
       function listerArticle(){
-            $um=new ArticleManager();
-            $articles=$um->findAll();
+            $am=new ArticleManager();
+            $articles=$am->findAll();
             $lignes=[];
             foreach($articles as $value){
                 //$dateCreation=$value['dateCreation']
@@ -49,7 +49,7 @@ class ArticleController extends MyFct{
             ];
             //------------Evoi page-------------*/
             $file="View/article/listArticle.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
       }
       
       function insererArticle(){
@@ -71,7 +71,6 @@ class ArticleController extends MyFct{
             $am=new ArticleManager();
             $article=$am->findById($id);
             $disabled="disabled";
-            //----Role----------------
             $this->generateFormArticle($article,$disabled);
       }
 
@@ -86,10 +85,10 @@ class ArticleController extends MyFct{
             $am=new ArticleManager();
             $connexion=$am->connexion();
             extract($data);
-            $id=(int) $id;  // transformation de $id en entier
-            if($id!=0){  // cas d'une modification
+            $id=(int) $id;
+            if($id!=0){
                 $am->update($data,$id);
-            }else{  //  cas d'une insertion 
+            }else{
                 $am->insert($data);
             }
             header("location:article");
@@ -104,7 +103,7 @@ class ArticleController extends MyFct{
                 'nbre'=>count($articles),
             ];
             $file="View/article/listArticle.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");        
+            $this->generatePage($file,$variables);        
       }      
 
       function generateFormArticle($article,$disabled){
@@ -119,7 +118,7 @@ class ArticleController extends MyFct{
             ];
             //----Ouverture de la page
             $file="View/article/formArticle.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
 
       }  
 }

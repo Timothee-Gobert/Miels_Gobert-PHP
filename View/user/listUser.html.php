@@ -61,6 +61,15 @@ function afficherUser() {
       }
 }
 
+function modifierUser() {
+      let id = getIdChecked('user');
+      if (id == 0) {
+            alert("selectionnez bien une ligne");
+      } else {
+            document.location.href = "User&action=update&id=" + id;
+      }
+}
+
 function supprimerUser() {
       let id = getIdChecked('user');
       if (id == 0) {
@@ -73,15 +82,6 @@ function supprimerUser() {
       }
 }
 
-function modifierUser() {
-      let id = getIdChecked('user');
-      if (id == 0) {
-            alert("selectionnez bien une ligne");
-      } else {
-            document.location.href = "User&action=update&id=" + id;
-      }
-}
-
 function chercher() {
       document.location.href = "user&action=search&mot=" + mot.value;
 }
@@ -89,23 +89,6 @@ function chercher() {
 function touche(event) {
       if (event.keyCode == 13) {
             chercher();
-      }
-}
-
-function chercher() {
-      document.location.href = "user&action=search&mot=" + mot.value;
-}
-
-function touche(event) {
-      if (event.keyCode == 13) {
-            chercher();
-      }
-}
-
-function supprimer(id) {
-      const response = confirm("Voulez-vous bien supprimer ce user?");
-      if (response) {
-            document.location.href = "user&action=delete&id=" + id;
       }
 }
 </script>

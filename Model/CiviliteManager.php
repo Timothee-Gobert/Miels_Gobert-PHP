@@ -20,6 +20,7 @@ class CiviliteManager extends Manager{
         $resultat=$this->getDescribeTable('civilite');
         return $resultat;
     }
+    // TODO : JE NE COPREND PAS 
     public function findById($id,$type="obj"){
         $resultat=$this->findByIdTable('civilite',$id);
         if($type=="obj"){

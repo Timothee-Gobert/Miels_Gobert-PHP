@@ -30,8 +30,8 @@ class CiviliteController extends MyFct{
       }
 
       function listerCivilite(){
-            $um=new CiviliteManager();
-            $civilites=$um->findAll();
+            $cm=new CiviliteManager();
+            $civilites=$cm->findAll();
             $lignes=[];
             foreach($civilites as $value){
                 $civilite=new Civilite($value);
@@ -45,7 +45,7 @@ class CiviliteController extends MyFct{
                 'nbre'=>count($lignes),
             ];
             $file="View/civilite/listCivilite.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
       }
       
       function insererCivilite(){
@@ -55,49 +55,49 @@ class CiviliteController extends MyFct{
       }      
         
       function modifierCivilite($id){
-            $um=new CiviliteManager(); 
-            $civilite=$um->findById($id);
+            $cm=new CiviliteManager(); 
+            $civilite=$cm->findById($id);
             $disabled="";
             $this->generateFormCivilite($civilite,$disabled);
       }  
 
       function afficherCivilite($id){
-            $um=new CiviliteManager();
-            $civilite=$um->findById($id);
+            $cm=new CiviliteManager();
+            $civilite=$cm->findById($id);
             $disabled="disabled";
             $this->generateFormCivilite($civilite,$disabled);
       }
 
       function supprimerCivilite($id){
-            $um=new CiviliteManager();
-            $um->deleteById($id);
+            $cm=new CiviliteManager();
+            $cm->deleteById($id);
             header("location:civilite");
             exit();
       }
 
       function sauvegarderCivilite($data,$files=[]){
-            $um=new CiviliteManager();
-            $connexion=$um->connexion();
+            $cm=new CiviliteManager();
+            $connexion=$cm->connexion();
             extract($data);
-            $id=(int) $id;  // transformation de $id en entier
+            $id=(int) $id;
             if($id!=0){
-                $um->update($data,$id);
+                $cm->update($data,$id);
             }else{
-                $um->insert($data);
+                $cm->insert($data);
             }
             header("location:civilite");
       }
 
       function chercherCivilite($mot){
-            $um=new CiviliteManager();
+            $cm=new CiviliteManager();
             $columnLikes=['libelle'];
-            $civilites=$um->search($columnLikes,$mot);
+            $civilites=$cm->search($columnLikes,$mot);
             $variables=[
                 'lignes'=>$civilites,
                 'nbre'=>count($civilites),
             ];
             $file="View/civilite/listCivilite.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");        
+            $this->generatePage($file,$variables);        
       }      
         
       function generateFormCivilite($civilite,$disabled){
@@ -107,7 +107,7 @@ class CiviliteController extends MyFct{
                   'disabled'=>$disabled,
             ];
             $file="View/civilite/formCivilite.html.php";
-            $this->generatePage($file,$variables,"View/base-bs-admin.html.php");
+            $this->generatePage($file,$variables);
 
       }  
 }

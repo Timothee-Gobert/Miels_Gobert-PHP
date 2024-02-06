@@ -1,13 +1,12 @@
 <?php
 
-require_once("./Config/parametres_serveur.php");
+require_once("Config/database_settings.php");
 
-function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
-      $dns="mysql:host=$host;dbname=$dbname;charset=utf8";
+function connexion($dbhost=HOST,$dbname=DBNAME,$dbuser=USER,$dbpass=PASSWORD){
       try{
-            $connexion = new PDO($dns,$user,$password);
+            $connexion = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8,$dbuser,$dbpass");
       }catch(Exception $e){
-            echo "<h1> Connexion imposible ! Vérifiez les paramètres! </h1>";
+            echo "<h1> Connexion  ! Vérifiez les paramètres!</h1>";
             die;
       }
       return $connexion;
