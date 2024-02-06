@@ -14,7 +14,7 @@
             </div>
             <table class="table table-striped">
                   <thead id="thead_civilite">
-                        <tr class="bg_green">
+                        <tr>
                               <th class="text-center">Choix</th>
                               <th class="text-center">Id</th>
                               <th class="text-center">libelle</th>
@@ -31,8 +31,10 @@
                         <?php endforeach;?>
                   </tbody>
                   <tfoot id="tfoot_civilite">
-                        <tr class="bg_green">
-                              <th colspan="3" class="text-center">Nombre civilites : <?=$nbre?></th>
+                        <tr>
+                        <th colspan="3" class="text-center">Nombre articles : <?=$nbre?></th>
+                              <th colspan="3" class="text-center"><a href="javascript:afficherDescCivilite()" class="btn btn-md btn-outline-dark"><i
+                              class=""></i>Description de civilite</a></th>
                         </tr>
                   </tfoot>
             </table>
@@ -40,6 +42,12 @@
 </div>
 
 <script>
+
+function afficherDescCivilite() {
+      document.location.href = "civilite&action=DescCivilite";
+}
+
+
 function creerCivilite() {
       document.location.href = "civilite&action=insert";
 }

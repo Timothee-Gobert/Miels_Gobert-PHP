@@ -25,7 +25,31 @@ class ArticleController extends MyFct{
                   case 'search':
                         $this->chercherArticle($mot);
                         break;
+                  case 'DescArticle':
+                        $this->descriptionArticle('article');
+                        break;
             }
+      }
+      function descriptionArticle($table){
+            $am=new ArticleManager();
+            $descArt=$am->getDescribe($table);
+            $lignes=[];
+            foreach($descArt as $value){
+                  $article=new ArticleDesc($value);
+                  $lignes[]=[
+                        'Field'=>$article->getField(),
+                        'Type'=>$article->getType(),
+                        'Null'=>$article->getNull(),
+                        'Key'=>$article->getKey(),
+                        'Default'=>$article->getDefault(),
+                        'Extra'=>$article->getExtra(),
+                  ];
+            }
+            $variables=[
+                  'lignes'=>$lignes,
+            ]; 
+            $file="View/article/listDescArticle.html.php";
+            $this->generatePage($file,$variables);
       }
 
       function listerArticle(){
@@ -49,6 +73,7 @@ class ArticleController extends MyFct{
             ];
             //------------Evoi page-------------*/
             $file="View/article/listArticle.html.php";
+            // printr($variables);die("die ac 62");
             $this->generatePage($file,$variables);
       }
       

@@ -34,6 +34,10 @@ class UserController extends MyFct{
                   case 'logout' :
                         $this->seDeconnecter();
                         break;
+                  case 'DescUser':
+                        $this->descriptionUser('user');
+                        break;
+
             }
       }
 
@@ -193,6 +197,26 @@ class UserController extends MyFct{
             //----Ouverture de la page
             $file="View/user/formUser.html.php";
             $this->generatePage($file,$variables);
-
-      }  
+      } 
+      function descriptionUser($table){
+            $um=new UserManager();
+            $descUser=$um->getDescribe($table);
+            $lignes=[];
+            foreach($descUser as $value){
+                  $user=new UserDesc($value);
+                  $lignes[]=[
+                        'Field'=>$user->getField(),
+                        'Type'=>$user->getType(),
+                        'Null'=>$user->getNull(),
+                        'Key'=>$user->getKey(),
+                        'Default'=>$user->getDefault(),
+                        'Extra'=>$user->getExtra(),
+                  ];
+            }
+            $variables=[
+                  'lignes'=>$lignes,
+            ]; 
+            $file="View/user/listDescUser.html.php";
+            $this->generatePage($file,$variables);
+      }
 }

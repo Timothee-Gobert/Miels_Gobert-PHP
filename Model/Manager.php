@@ -14,14 +14,11 @@ class Manager{
         }
         $condition=(!$condition)?"true" : $condition;
         $sql="select * from $table where $condition $order";
-        // echo $sql;
-        // printr($values);die;
         $requete=$connexion->prepare($sql);
         $requete->execute($values);
         $resultats=$requete->fetchAll(PDO::FETCH_ASSOC);
         if($type=='obj'){
             $class=ucfirst($table);
-            // printr($resultats);die;
             $objs=[];
             foreach($resultats as $value){
                 $obj=new $class($value);
@@ -32,30 +29,27 @@ class Manager{
             return $resultats;
         }
     }
-        // generation d'une requete sql pour faire une recherche suivant le contenue de $dataCondition
-        function findOneByConditionTable($table,$dataCondition=[],$type='obj'){
-            $connexion=$this->connexion();
-            $condition='';
-            $values=[];
-            foreach($dataCondition as $key=>$value){
-                $condition.=(!$condition)?" $key=? " : " and $key=? ";
-                $values[]=$value;
-            }
-            $condition=(!$condition)?"true" : $condition;
-            $sql="select * from $table where $condition";
-            // echo $sql;
-            // printr($values);die;
-            $requete=$connexion->prepare($sql);
-            $requete->execute($values);
-            $resultat=$requete->fetch(PDO::FETCH_ASSOC);
-            if($type=='obj'){
-                $class=ucfirst($table);
-                $obj=new $class($resultat);
-                return $obj;
-            }else{
-                return $resultat;
-            }
+    function findOneByConditionTable($table,$dataCondition=[],$type='obj'){
+        $connexion=$this->connexion();
+        $condition='';
+        $values=[];
+        foreach($dataCondition as $key=>$value){
+            $condition.=(!$condition)?" $key=? " : " and $key=? ";
+            $values[]=$value;
         }
+        $condition=(!$condition)?"true" : $condition;
+        $sql="select * from $table where $condition";
+        $requete=$connexion->prepare($sql);
+        $requete->execute($values);
+        $resultat=$requete->fetch(PDO::FETCH_ASSOC);
+        if($type=='obj'){
+            $class=ucfirst($table);
+            $obj=new $class($resultat);
+            return $obj;
+        }else{
+            return $resultat;
+        }
+    }
     public function searchTable($table,$columnLikes,$mot){
         $connexion=$this->connexion();
         $condition="";
@@ -65,11 +59,7 @@ class Manager{
             $values[]="%$mot%";
         }
         $sql="select * from $table where $condition";
-        // --- test
-        // echo $sql;
-        // MyFct::sprintr($values);
-        // die;
-        // ---
+        
         $requete=$connexion->prepare($sql);
         $requete->execute($values);
         $resultat=$requete->fetchAll(PDO::FETCH_ASSOC);
@@ -81,45 +71,32 @@ class Manager{
         $values=[];
         foreach($data as $key=>$value){
             if($key!='id'){
-                $setColumn.=($setColumn=="")  ?  "$key=?"  :  ",$key=?"; // if ternaire
+                $setColumn.=($setColumn=="")  ?  "$key=?"  :  ",$key=?";
                 $values[]=$value;
             }
         }
         $sql="update $table set $setColumn where id=?";
         $values[]=$id;
-        // --- test
-        // echo $sql;
-        // MyFct::sprintr($values);
-        // die;
-        // ---
         $requete=$connexion->prepare($sql);
         $requete->execute($values);
     }
+    // TODO remplacer if $pi par un for et un implode
+    // gain de la moitier des lignes 
     function insertTable($table,$data){
         $connexion=$this->connexion();
-        $column="";
-        $pi=""; // point d'interrogation
-        $values=[];// tableau pour la method execute
-        // ----- geneeration de la requete
+        $values=[];
         foreach($data as $key=>$value){
-            if($key!='id'){
-                if($column==''){
-                    $column.=$key;
-                    $pi.="?";
-                }else{
-                    $column.=",$key";
-                    $pi.=",?";
-                }
-                $values[]=$value;
+            $values[]=$value;
+            $column[]=$key; 
             }
-        }
-        $sql="insert into $table ($column) values ($pi)";
-        
+            $columns=implode(',',$column);
+            $pi="?";
+            for ($i=1;$i<(count($values));$i++) {$pi.=",?";}
+        $sql="insert into $table ($columns) values ($pi)";
         $requete=$connexion->prepare($sql);
-        // printr($value);die("Die Manager.php ligne 119");
         $requete->execute($values);
     }
-
+    
     function connexion($dbhost=HOST,$dbname=DBNAME,$dbuser=USER,$dbpass=PASSWORD){
         try{
             $connexion = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8",$dbuser,$dbpass);
@@ -128,19 +105,15 @@ class Manager{
             die;
       }
       return $connexion;
-        }
+    }
     
     function getDescribeTable($table){
         $connexion=$this->connexion();
-        $sql="desc $table";  // requete pour affichage de la structure la table collaborateur
+        $sql="desc $table"; 
         $requete=$connexion->prepare($sql);
         $requete->execute();
-        $colonnes=$requete->fetchAll(PDO::FETCH_COLUMN);// recuperation de tous les noms de colonne de la table collaborateur
-        $variables=[];
-        foreach($colonnes as $valeur){
-            $variables[$valeur]='';
-        }  
-        return $variables;  
+        $tables=$requete->fetchAll(PDO::FETCH_ASSOC); 
+        return $tables;  
     }
     
     function findByIdTable($nomTable,$id){
@@ -148,7 +121,6 @@ class Manager{
         $sql="select * from $nomTable where id=?";
         $requete=$connexion->prepare($sql);
         $requete->execute([$id]);
-        ///$resultat=$requete->fetch(); // Mettre dans $ article l'article trouvé
         $resultat=$requete->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }

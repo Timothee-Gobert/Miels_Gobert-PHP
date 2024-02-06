@@ -40,7 +40,9 @@
                   </tbody>
                   <tfoot id="tfoot_article">
                         <tr>
-                              <th colspan="6" class="text-center">Nombre articles : <?=$nbre?></th>
+                              <th colspan="3" class="text-center">Nombre articles : <?=$nbre?></th>
+                              <th colspan="3" class="text-center"><a href="javascript:afficherDescArticle()" class="btn btn-md btn-outline-dark"><i
+                              class=""></i>Description de article</a></th>
                         </tr>
                   </tfoot>
             </table>
@@ -48,6 +50,11 @@
 </div>
 
 <script>
+      
+function afficherDescArticle() {
+      document.location.href = "article&action=DescArticle";
+}
+
 function creerArticle() {
       document.location.href = "article&action=insert";
 }
@@ -92,20 +99,11 @@ function touche(event) {
       }
 }
 
-function chercher() {
-      document.location.href = "article&action=search&mot=" + mot.value;
-}
-
-function touche(event) {
-      if (event.keyCode == 13) {
-            chercher();
-      }
-}
-
 function supprimer(id) {
       const response = confirm("Voulez-vous supprimer cet article?");
       if (response) {
             document.location.href = "article&action=delete&id=" + id;
       }
 }
+
 </script>

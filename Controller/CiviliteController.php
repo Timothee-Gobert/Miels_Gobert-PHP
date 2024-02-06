@@ -26,7 +26,31 @@ class CiviliteController extends MyFct{
                   case 'search':
                         $this->chercherCivilite($mot);
                         break;
+                  case 'DescCivilite':
+                        $this->descriptionCivilite('civilite');
+                        break;
             }
+      }
+      function descriptionCivilite($table){
+            $am=new CiviliteManager();
+            $descArt=$am->getDescribe($table);
+            $lignes=[];
+            foreach($descArt as $value){
+                  $civilite=new CiviliteDesc($value);
+                  $lignes[]=[
+                        'Field'=>$civilite->getField(),
+                        'Type'=>$civilite->getType(),
+                        'Null'=>$civilite->getNull(),
+                        'Key'=>$civilite->getKey(),
+                        'Default'=>$civilite->getDefault(),
+                        'Extra'=>$civilite->getExtra(),
+                  ];
+            }
+            $variables=[
+                  'lignes'=>$lignes,
+            ]; 
+            $file="View/civilite/listDescCivilite.html.php";
+            $this->generatePage($file,$variables);
       }
 
       function listerCivilite(){

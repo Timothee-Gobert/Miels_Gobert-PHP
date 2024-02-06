@@ -22,11 +22,6 @@ class ArticleManager extends Manager{
             return $this->findOneByConditionTable('article',$dataCondition,$type);
       }
 
-      public function getDescribe(){
-            $resultat=$this->getDescribeTable('article');
-            return $resultat;
-      }
-
       public function findById($id,$type='obj'){
             $resultat=$this->findByIdTable('article',$id);
             if($type=='obj'){
@@ -53,6 +48,11 @@ class ArticleManager extends Manager{
 
       public function findAll(){
             $resultat=$this->listTable('article');
+            return $resultat;
+      }
+
+      public function getDescribe(){
+            $resultat=$this->getDescribeTable('article');
             return $resultat;
       }
 }

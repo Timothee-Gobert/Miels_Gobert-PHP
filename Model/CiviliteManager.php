@@ -16,10 +16,6 @@ class CiviliteManager extends Manager{
     public function insert($data){
         $this->insertTable('civilite',$data);
     }
-    public function getDescribe(){
-        $resultat=$this->getDescribeTable('civilite');
-        return $resultat;
-    }
     // TODO : JE NE COPREND PAS 
     public function findById($id,$type="obj"){
         $resultat=$this->findByIdTable('civilite',$id);
@@ -35,6 +31,10 @@ class CiviliteManager extends Manager{
     }
     public function findAll(){
         $resultat=$this->listTable('civilite');
+        return $resultat;
+    }
+    public function getDescribe(){
+        $resultat=$this->getDescribeTable('civilite');
         return $resultat;
     }
 }

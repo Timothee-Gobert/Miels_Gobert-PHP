@@ -39,8 +39,10 @@
                         <?php endforeach;?>
                   </tbody>
                   <tfoot id="tfoot_user">
-                        <tr class="bg_green">
-                              <th colspan="6" class="text-center">Nombre users : <?=$nbre?></th>
+                        <tr>
+                              <th colspan="3" class="text-center">Nombre users : <?=$nbre?></th>
+                              <th colspan="3" class="text-center"><a href="javascript:afficherDescUser()" class="btn btn-md btn-outline-dark"><i
+                              class=""></i>Description de user</a></th>
                         </tr>
                   </tfoot>
             </table>
@@ -48,6 +50,9 @@
 </div>
 
 <script>
+      function afficherDescUser() {
+      document.location.href = "user&action=DescUser";
+}
 function creerUser() {
       document.location.href = "user&action=insert";
 }
